@@ -9,7 +9,7 @@ public class InteractIcon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Hide();
     }
 
     // Update is called once per frame
@@ -23,6 +23,8 @@ public class InteractIcon : MonoBehaviour
         Image myImage = this.GetComponent<Image>();
         myImage.sprite = s;
         myImage.enabled = true;
+
+        print("SOMETHING IS SHOWING ICON");
     }
 
     public void ChangeIcon(Sprite s)

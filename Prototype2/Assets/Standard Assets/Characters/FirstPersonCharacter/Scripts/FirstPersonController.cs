@@ -93,6 +93,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
         }
 
 
+        public MouseLook GetMouseLook()
+        {
+            return m_MouseLook;
+        }
+
         private void FixedUpdate()
         {
             float speed;
