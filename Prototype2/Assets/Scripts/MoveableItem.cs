@@ -30,6 +30,9 @@
                 Debug.Log("LIMIT SHOULD BE REACHED");
                 this.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 _canMove = false;
+            } else
+            {
+                _canMove = true;
             }
         }
 
@@ -42,14 +45,17 @@
                 if (_canMove)
                 {
                     this.GetComponent<Rigidbody>().AddForce(GameObject.Find("FPSController").gameObject.transform.forward * Input.GetAxis("Mouse Y") * openSensitivity);
+                } else if (Input.GetAxis("Mouse Y") >= 0)
+                {
+                    this.GetComponent<Rigidbody>().AddForce(GameObject.Find("FPSController").gameObject.transform.forward * Input.GetAxis("Mouse Y") * openSensitivity);
                 } else
                 {
-                    this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    //this.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 }
+            }
 
                 GameObject.Find("FPSController").GetComponent<FirstPersonController>().GetMouseLook().XSensitivity = cameraSensitivityOnGrab;
                 GameObject.Find("FPSController").GetComponent<FirstPersonController>().GetMouseLook().YSensitivity = cameraSensitivityOnGrab;
-            }
         }
 
         private void OnMouseUp()
