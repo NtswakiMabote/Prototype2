@@ -24,11 +24,17 @@ public class MyButtonModular : MonoBehaviour {
     }
 
 
-        private void OnMouseOver()
+    private void OnMouseEnter()
+    {
+        AudioManager.PlaySound(Resources.Load("ButtonPress") as AudioClip);
+    }
+
+    private void OnMouseOver()
     {
         print("PICKED UP");
 
         this.GetComponent<Renderer>().material = selected;
+        
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             m_OnClicked.Invoke();

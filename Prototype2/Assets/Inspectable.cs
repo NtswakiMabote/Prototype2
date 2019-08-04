@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class Inspectable : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Inspectable : MonoBehaviour
 
     public GameObject inspectableObject;
     public float distanceAwayFromCamera;
+    public UnityEvent m_OnInspect;
+    public UnityEvent m_OnExitInspect;
 
     private GameObject _player;
     private GameObject _currInspectingObject;
@@ -25,14 +28,27 @@ public class Inspectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
+            m_OnExitInspect.Invoke();
             Return();
+        }
+
+       if (m_OnInspect == null)
+        {
+            m_OnInspect = new UnityEvent();
+        }
+
+        if (m_OnExitInspect == null)
+        {
+            m_OnExitInspect = new UnityEvent();
         }
     }
 
     private void Inspect()
     {
+        m_OnInspect.Invoke();
+
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 

@@ -12,12 +12,18 @@
         public float doorOpenAngle;
         public float openSensitivity;
 
+        public float openDoorForce;
+        public float closeDoorForce;
+
         public UnityEvent m_OnDoorOpen;
         public UnityEvent m_OnDoorClosed;
+        public UnityEvent m_OnGrabbed;
 
         private bool _openEventInvoked;
         private bool _closedEventInvoked;
         private float _originalCameraSensitivity;
+
+        private bool _shouldOpenDoor;
 
         // Start is called before the first frame update
         void Start()
@@ -25,6 +31,11 @@
             if (m_OnDoorOpen == null)
             {
                 m_OnDoorOpen = new UnityEvent();
+            }
+
+            if (m_OnGrabbed == null)
+            {
+                m_OnGrabbed = new UnityEvent();
             }
 
             _openEventInvoked = false;
@@ -36,11 +47,11 @@
         // Update is called once per frame
         void Update()
         {
-            //if (Input.GetKey(KeyCode.E))
-            //{
-            //    this.GetComponent<Rigidbody>().AddForce(transform.forward * 10);
-            //}
 
+            //if (Input.GetKey(KeyCode.G))
+            //{
+            //    OpenDoor();
+            //}
 
             if (_openEventInvoked == false)
             {
@@ -61,6 +72,14 @@
             }
         }
 
+        private void OnMouseDown()
+        {
+            if (GameObject.Find("FirstPersonCharacter")!=null)
+            {
+                m_OnGrabbed.Invoke();
+                m_OnGrabbed = new UnityEvent();
+            }
+        }
         private void OnMouseDrag()
         {
 
@@ -80,6 +99,30 @@
                 GameObject.Find("FPSController").GetComponent<FirstPersonController>().GetMouseLook().XSensitivity = _originalCameraSensitivity;
                 GameObject.Find("FPSController").GetComponent<FirstPersonController>().GetMouseLook().YSensitivity = _originalCameraSensitivity;
             }
+        }
+
+        public void OpenDoor()
+        {
+
+            JointLimits limits = this.GetComponent<HingeJoint>().limits;
+            limits.max = 1;
+            this.GetComponent<HingeJoint>().limits = limits;
+
+            this.GetComponent<Rigidbody>().AddForce(Vector3.forward * openDoorForce);
+
+
+            AudioManager.PlaySound(Resources.Load("Wooden creak") as AudioClip);
+        }
+
+        public void CloseDoor()
+        {
+            this.GetComponent<Rigidbody>().AddForce(Vector3.forward * closeDoorForce);
+
+            JointLimits limits = this.GetComponent<HingeJoint>().limits;
+            limits.max = -90;
+            this.GetComponent<HingeJoint>().limits = limits;
+
+            AudioManager.PlaySound(Resources.Load("Locked door") as AudioClip);
         }
     }
 }
