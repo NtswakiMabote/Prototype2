@@ -27,7 +27,6 @@
         {
             if (this.transform.position.z >= _originalPos.z + zLimit)
             {
-                Debug.Log("LIMIT SHOULD BE REACHED");
                 this.GetComponent<Rigidbody>().velocity = Vector3.zero;
                 _canMove = false;
             } else

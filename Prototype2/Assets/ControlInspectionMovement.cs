@@ -8,9 +8,9 @@ public class ControlInspectionMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotSpeed);
+          transform.Rotate(new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotSpeed);
         }
     }
 }

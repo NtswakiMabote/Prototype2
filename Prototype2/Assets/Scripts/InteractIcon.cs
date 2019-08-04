@@ -23,8 +23,6 @@ public class InteractIcon : MonoBehaviour
         Image myImage = this.GetComponent<Image>();
         myImage.sprite = s;
         myImage.enabled = true;
-
-        print("SOMETHING IS SHOWING ICON");
     }
 
     public void ChangeIcon(Sprite s)

@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: dc38fac2b0256074e92e0086ff4bdaf7
+  - enabled: 1
+    path: Assets/Scenes/Mess House.unity
+    guid: 6967e9b67c7b29049a6b084e685cc527
+  - enabled: 1
+    path: Assets/Scenes/OpeningScene.unity
+    guid: 48dcab00441e30e4f908167a654d1b35
   m_configObjects: {}

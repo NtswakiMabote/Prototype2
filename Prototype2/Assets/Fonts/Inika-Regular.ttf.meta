@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 885d4ed04799fa843bc89bff4f1144f4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Inika
+  fontNames:
+  - Inika
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 2e1c5a33982c69c409c164728fd282c3, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

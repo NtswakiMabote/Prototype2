@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Inspectable : MonoBehaviour
 {
 
+    private static GameObject _currInspectable;
+
     public GameObject inspectableObject;
     public float distanceAwayFromCamera;
 
@@ -23,7 +25,7 @@ public class Inspectable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Mouse1) || Input.GetKeyDown(KeyCode.Escape))
         {
             Return();
         }
@@ -31,6 +33,11 @@ public class Inspectable : MonoBehaviour
 
     private void Inspect()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        _currInspectable = this.gameObject;
+
         GameObject inspectionCamera = GameObject.Find("InspectionCamera");
 
         inspectionCamera.GetComponent<Camera>().enabled = true;
@@ -46,11 +53,16 @@ public class Inspectable : MonoBehaviour
         _currInspectingObject = Instantiate(inspectableObject, instantiatePos, Quaternion.identity);
         _currInspectingObject.transform.LookAt(inspectionCamera.transform.position);
 
+        this.GetComponent<MeshRenderer>().enabled = false;
+
         GameObject.Find("CrossHair").GetComponent<Image>().enabled = false;
     }
 
-    private void Return()
+    public void Return()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         GameObject inspectionCamera = GameObject.Find("InspectionCamera");
 
         inspectionCamera.GetComponent<Camera>().enabled = false;
@@ -63,7 +75,11 @@ public class Inspectable : MonoBehaviour
         instantiatePos = inspectionCamera.transform.position + inspectionCamera.transform.forward * distanceAwayFromCamera;
         Destroy(_currInspectingObject);
 
+        this.GetComponent<MeshRenderer>().enabled = true;
+
         _currInspectingObject = null;
+
+        GameObject.Find("CrossHair").GetComponent<Image>().enabled = true;
     }
 
     private void OnMouseDown()
@@ -72,5 +88,10 @@ public class Inspectable : MonoBehaviour
         {
             Inspect();
         }
+    }
+
+    public static GameObject GetCurrInspectable()
+    {
+        return _currInspectable;
     }
 }
